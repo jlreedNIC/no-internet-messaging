@@ -37,6 +37,7 @@ def on_message(client, userdata, msg) :
     message_queue.append(temp_message)
 
     print_messages()
+    print_instr()
 
 def on_disconnect(client, userdata, rc, properties=None) :
     if rc == paho.MQTT_ERR_SUCCESS  :
@@ -111,21 +112,22 @@ def print_messages() :
     
     print("-----messages------")
 
+def print_instr() :
+    print("\nWhat would you like to do?")
+    print(" (1) Send message \n (0) Exit \n")
+
 client = connect_local_MQTT()
 client.subscribe("#")
 
 client.loop_start()
 answer = True
-# choice = ""
+print_instr()
 while answer :
     
     # print_messages()
+    
 
-    print("\nWhat would you like to do?")
-    # print(" (1) send message \n (0) Exit")
-    choice = input(" (1) send message \n (0) Exit \n")
-    # print(choice)
-    # print(type(choice))
+    choice = input()
     if choice == "0":
         answer = False
         client.disconnect()
